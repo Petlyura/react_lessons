@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import defaultImage from "./default.jpg";
 
 console.log("dafaultImage:", defaultImage);
@@ -11,7 +12,10 @@ export default function Painting(props) {
     authorTag = "unknown",
     authorUrl,
     price,
+    quantity,
   } = props;
+
+  const isInstock = quantity > 10 ? "instock" : "outstock";
 
   return (
     <div>
@@ -21,8 +25,17 @@ export default function Painting(props) {
         Author: <a href={authorUrl}>{authorTag}</a>
       </p>
       <p>Price: {price} credits</p>
-      <p>Availability: instock or outstock</p>
+      <p>Availability: {isInstock}</p>
       <button type="button">Add to cart</button>
     </div>
   );
 }
+
+Painting.propTypes = {
+  imageUrl: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  authorTag: PropTypes.string,
+  authorUrl: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+};
